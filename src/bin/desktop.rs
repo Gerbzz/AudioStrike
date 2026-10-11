@@ -646,7 +646,8 @@ impl eframe::App for AudioStrikeApp {
         if let Some(player) = &self.player {
             self.playhead_frame = player.frame() as u64;
             if player.failed() {
-                self.status = "Audio device stopped; project remains saved".into();
+                self.status = player.failure_reason().unwrap_or_else(||
+                    "Audio output stopped. Reconnect the device and press Play to retry; the project was not changed.".into());
                 self.player = None;
             } else if player.finished() {
                 self.player = None;
