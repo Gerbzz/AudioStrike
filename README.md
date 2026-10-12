@@ -1,30 +1,27 @@
-# AudioStrike Windows engineering preview
+# AudioStrike source preview
 
-AudioStrike is a local Rust multitrack audio editor. Its current Windows native preview opens a portable `.audiostrike` project, imports WAV onto separate timeline tracks, shows waveforms, plays through the default output device, edits clip position and fades, adjusts track volume/pan/mute/solo, saves each edit, reopens it, and renders stereo 48 kHz 24-bit PCM WAV. Clip split at the playhead, undo/redo, anchored timeline zoom, and horizontal scrolling are available. This is an engineering checkpoint, not a first-release workstation.
+AudioStrike is a local desktop audio workstation based on the complete [SoundCraft](https://github.com/storytold/soundcraft) Rust source at commit `480b0b2dd75df388d79746a035652069a9bdcbc6`. The Windows desktop target is `audiostrike`; the headless editor/converter is `audiostrike-cli`. Internal `soundcraft-*` crate names and the donor `.scraft` editable format remain for compatibility. No hosted service or account is required.
 
-Build and launch in PowerShell from this directory:
+**Status: pre-alpha source.** On Windows, the desktop and CLI binaries compiled with the pinned lockfile, and the workspace suite passed 612 tests with one ignored. A synthetic CLI workflow converted a legacy project, edited and saved it, reopened it, and exported a non-silent WAV. The desktop window itself has not been opened or visually tested. Device playback, recording, third-party plugins, accessibility, other operating systems, and broad interchange fidelity are unverified. This repository does not provide a release binary.
 
-```powershell
-$env:CARGO_BUILD_JOBS='1'
-$env:CARGO_TARGET_DIR='..\target-audiostrike'
-cargo test --locked --features desktop
-cargo run --locked --features desktop --bin audiostrike-desktop
+## Legacy projects
+
+The earlier AudioStrike preview used a `.audiostrike` directory, which is distinct from `.scraft`. The supported explicit conversion is:
+
+```text
+audiostrike-cli migrate-legacy SOURCE.audiostrike OUTPUT.scraft [--current-state-only]
 ```
 
-A fresh checkout needs registry access for its first dependency download. After the registry cache is populated, add `--offline` if an offline build is needed.
+It creates a separate project and leaves the source project/media untouched. The new project references the original media by absolute path. Existing undo history requires `--current-state-only` and stays in the old project. Conversion refuses unsupported pan, fades, overlapping clips, mixed-channel tracks, gains, malformed input, and uncertain recovery state; it does not guarantee sample-identical mixing. Keep a copy of the original project and media.
 
-Use **New** to create a `.audiostrike` folder, **Import WAV** to add a track and clip, drag a clip to move it, select a clip for precise start/fade/split controls, then **Bounce WAV**. Space toggles playback, Ctrl+S saves, Ctrl+Z undoes, and Ctrl+Y or Ctrl+Shift+Z redoes when text editing is not focused. Every successful edit saves. The project contains `project.json` and canonical float WAV files in `media/`; the source import stays untouched. The app shows errors in its status bar and refuses invalid inputs.
+## Build from source
 
-Local QA helpers: `--demo PATH.audiostrike` creates two generated PCM stems; `--project PATH.audiostrike` opens a project; `--capture FILE.png` requests a screenshot from the running app and exits; `--probe-audio` checks the default output config; `--smoke-audio PATH.audiostrike` runs 500 ms of output and checks that the callback advanced. The checked-in tests generate their own fixtures; QA captures are not included in this source checkout. The command line core remains available with `cargo run --locked --bin audiostrike --` and prints the available commands.
+Use Rust 1.95 or newer and a reviewed Cargo dependency cache. The pinned UI Git dependency is `storytold/craft-libs` revision `5c874d51eeb3de70e735c8ce87a59a7dedd47675`.
 
-The native timeline and mixer use adapted, attributed logic from pinned FilmCraft source. WAV import and playback-to-device rate conversion use its pinned resampler. Exact upstream paths, commit, license, local copies, and adaptations are in [`THIRD_PARTY.md`](THIRD_PARTY.md).
+```powershell
+cargo fetch --locked --target x86_64-pc-windows-msvc
+cargo test --locked --offline --workspace
+cargo build --locked --offline -p soundcraft -p soundcraft-cli --bins
+```
 
-Current limits: WAV extensible and compressed input are rejected; 16/24-bit PCM and float 32-bit WAV at 44.1/48 kHz are accepted. Import still buffers at most 256 MiB. Playback and 24-bit export stream project media in bounded 4,096-frame blocks; the callback reads from a lock-free frame ring while a worker fills it. The output adapter selects a supported device configuration, converts 48 kHz project audio when needed, maps channels and sample formats, and permits a fresh retry after device loss. A recording writer accepts caller-supplied 48 kHz float frames and writes a valid WAV; its synthetic-input test does not open a microphone, and there is no recording UI or device input path yet. Project save refuses existing temp/backup sidecars instead of replacing recovery data; malformed media frame counts are rejected on open and in the streaming reader.
-
-Bounce requires a new `.wav` destination outside the project tree. It uses unique staging and no-clobber publication, refuses occupied files and tested project/recovery/hard-link/symlink aliases, and removes staging after a late render error. Sample peaks above full scale still fail export. The frozen Windows source passed 34 desktop-feature tests, including six export-safety and seven deterministic output-adapter cases; a separate CLI replay and independent recheck confirmed the tested no-clobber paths. Concurrent path-swap attacks, native OS save-dialog interaction, real hardware loss/recovery, audible fidelity, pointer editing, and screen-reader behavior remain unverified. There is no normalization, dither, automation, or plugin hosting. Windows is the only tested platform.
-
-Planning history and QA captures are not included in this standalone source checkout.
-
-## Source terms
-
-No first-party license grant is stated for this app in this checkout. `THIRD_PARTY.md` records attribution for identified upstream material; the included donor license files, where present, apply to that material.
+The donor MIT/Apache licenses and `NOTICE` are preserved. [UPSTREAM.md](UPSTREAM.md) records source provenance, [ATTRIBUTION.md](ATTRIBUTION.md) separates donor and AudioStrike changes, and [DEPENDENCY_RESOLUTION.md](DEPENDENCY_RESOLUTION.md) records the pinned external UI dependency. Upstream brand assets and app icon are excluded. The About contributor table is empty because upstream contributor metadata is not included in this public source boundary.
