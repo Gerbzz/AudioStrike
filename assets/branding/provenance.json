@@ -1,0 +1,21 @@
+{
+  "app": "AudioStrike",
+  "asset": "assets/branding/AudioStrike.png",
+  "method": "Lossless rectangular extraction of original pixels with ImageMagick. No scaling, recoloring, tracing, generation, transparency fabrication or animal changes. Original cream outside rounded corners retained. Labels excluded.",
+  "coordinate_system": "Origin top-left; crop bounds [left, top, right, bottom), right/bottom exclusive.",
+  "source_sha256": "333494969e42aa593769e0763a6eac98280ade672e395d528640a217d3dbfc13",
+  "crop_bounds": [
+    32,
+    0,
+    688,
+    656
+  ],
+  "dimensions": [
+    656,
+    656
+  ],
+  "sha256": "bb22594fc25ba161fc3b3ea132aa5b796de85dfb78756317af2d1bff9b3af15e",
+  "decoded_rgb_sha256": "0f0c6e793e582adf84ddebe7b1b21d3311e46c103dabd9ac48d60bf1cf6b90e5",
+  "pixel_equality_verified": true,
+  "git_blob_sha": "ecf663739291468f77bd86188b926f9dafeab204"
+}
