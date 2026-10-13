@@ -1,8 +1,24 @@
-# AudioStrike source preview
+# AudioStrike
 
-AudioStrike is a local desktop audio workstation based on the complete [SoundCraft](https://github.com/storytold/soundcraft) Rust source at commit `480b0b2dd75df388d79746a035652069a9bdcbc6`. The Windows desktop target is `audiostrike`; the headless editor/converter is `audiostrike-cli`. Internal `soundcraft-*` crate names and the donor `.scraft` editable format remain for compatibility. No hosted service or account is required.
+**by PWDS**
 
-**Status: pre-alpha source.** On Windows, the desktop and CLI binaries compiled with the pinned lockfile, and the workspace suite passed 612 tests with one ignored. A synthetic CLI workflow converted a legacy project, edited and saved it, reopened it, and exported a non-silent WAV. The desktop window itself has not been opened or visually tested. Device playback, recording, third-party plugins, accessibility, other operating systems, and broad interchange fidelity are unverified. This repository does not provide a release binary.
+**Shape the sound you want to hear.**
+
+AudioStrike is a local audio workstation with a desktop editor and a headless editing tool. Work on an editable project, revisit changes, and export audio when a mix is ready for review.
+
+### Highlights
+
+- Open and edit local audio projects.
+- Keep an editable session alongside exported sound.
+- Use the desktop target or the command-line editor.
+
+## Current status
+
+Pre-alpha source. The Windows binaries compiled and a synthetic command-line project was converted, edited, reopened, and exported as a non-silent WAV. The desktop window, device playback and recording, third-party plugins, accessibility, and broad interchange fidelity remain unverified; no release binary is provided.
+
+## Work with a session
+
+Keep changes in an editable audio project while developing a mix, then export a WAV for review. The command-line editor supports a headless path for conversion and edits; the native desktop target needs its own interaction and audio-device checks before a release.
 
 ## Legacy projects
 
@@ -25,3 +41,7 @@ cargo build --locked --offline -p soundcraft -p soundcraft-cli --bins
 ```
 
 The donor MIT/Apache licenses and `NOTICE` are preserved. [UPSTREAM.md](UPSTREAM.md) records source provenance, [ATTRIBUTION.md](ATTRIBUTION.md) separates donor and AudioStrike changes, and [DEPENDENCY_RESOLUTION.md](DEPENDENCY_RESOLUTION.md) records the pinned external UI dependency. Upstream brand assets and app icon are excluded. The About contributor table is empty because upstream contributor metadata is not included in this public source boundary.
+
+## Source and verification notes
+
+AudioStrike adapts the complete [SoundCraft](https://github.com/storytold/soundcraft) Rust source at `480b0b2dd75df388d79746a035652069a9bdcbc6`. The Windows binaries are `audiostrike` and `audiostrike-cli`; retained `soundcraft-*` crate names and `.scraft` projects support compatibility. The workspace passed 612 tests with one ignored. A synthetic CLI project was converted, edited, saved, reopened, and exported as non-silent WAV. The desktop window has not been visually tested.
