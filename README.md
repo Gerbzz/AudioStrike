@@ -4,21 +4,21 @@
 
 **Shape the sound you want to hear.**
 
-AudioStrike is a local audio workstation with a desktop editor and a headless editing tool. Work on an editable project, revisit changes, and export audio when a mix is ready for review.
+AudioStrike brings track editing and a mix workspace into a Rust desktop project. Keep work in an editable `.scraft` session, use the companion CLI for supported legacy conversion, and export WAV audio for review.
 
 ### Highlights
 
-- Open and edit local audio projects.
-- Keep an editable session alongside exported sound.
-- Use the desktop target or the command-line editor.
+- Arrange and revise tracks in an editable `.scraft` session.
+- Balance a project with the retained mix tools and export WAV audio.
+- Convert supported legacy projects through `audiostrike-cli` without changing their sources.
 
 ## Current status
 
 Pre-alpha source. The Windows binaries compiled and a synthetic command-line project was converted, edited, reopened, and exported as a non-silent WAV. The desktop window, device playback and recording, third-party plugins, accessibility, and broad interchange fidelity remain unverified; no release binary is provided.
 
-## Work with a session
+## Edit and export a session
 
-Keep changes in an editable audio project while developing a mix, then export a WAV for review. The command-line editor supports a headless path for conversion and edits; the native desktop target needs its own interaction and audio-device checks before a release.
+The retained editor source has track editing and mix views for shaping a session before export. Save changes in `.scraft` so the project remains editable. The exercised command-line path converted a supported legacy project, edited and reopened the new session, then exported a non-silent WAV; the desktop window and audio devices have not had direct acceptance.
 
 ## Legacy projects
 
