@@ -2,13 +2,13 @@
   <img src="assets/branding/AudioStrike.png" alt="Original AudioStrike logo" width="160" height="160">
 </p>
 
-# AudioStrike
+<h1 align="center">AudioStrike</h1>
 
-**by PWDS**
+<p align="center"><strong>by PWDS</strong><br><strong>Shape a session, then render the mix.</strong></p>
 
-**Shape a session, then render the mix.** AudioStrike brings track editing, a mix workspace, editable `.scraft` sessions, and WAV export into a Rust desktop source project.
+AudioStrike brings track editing, a mix workspace, editable `.scraft` sessions, and WAV export into a Rust desktop source project.
 
-[Build from source](#build-from-source) · [Legacy conversion](#bring-an-earlier-project-forward) · [Source provenance](UPSTREAM.md) · [Original artwork](assets/branding)
+<p align="center"><a href="#build-from-source">Build from source</a> · <a href="#bring-an-earlier-project-forward">Legacy conversion</a> · <a href="UPSTREAM.md">Source provenance</a> · <a href="assets/branding">Original artwork</a></p>
 
 ## Build a mix without losing the project
 
