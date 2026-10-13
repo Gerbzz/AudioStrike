@@ -4,17 +4,13 @@
 
 **Shape a session, then render the mix.** AudioStrike brings track editing, a mix workspace, editable `.scraft` sessions, and WAV export into a Rust desktop source project.
 
-![AudioStrike offscreen editor demo with synthesized tracks and waveforms](docs/images/audiostrike-ui-demo.png)
-
-*The real egui editor rendered offscreen with its synthesized “Midnight Groove” demo session. The status visibly says “no audio engine”: this image does not verify a launched desktop window, device playback, recording, or audible sound.*
-
 [Build from source](#build-from-source) · [Legacy conversion](#bring-an-earlier-project-forward) · [Source provenance](UPSTREAM.md)
 
 ## Build a mix without losing the project
 
 ### Arrange and revise tracks
 
-The retained editor source shows clips, waveforms, track controls, the timeline, and a mix workspace. Work stays in an editable `.scraft` session; a rendered WAV is a separate review file. The visual demo uses audio synthesized by the source, not a captured microphone or bundled commercial media.
+The retained editor source shows clips, waveforms, track controls, the timeline, and a mix workspace. Work stays in an editable `.scraft` session; a rendered WAV is a separate review file. The source includes a synthesized demo session rather than captured microphone or bundled commercial media.
 
 ### Export for review
 
