@@ -1,21 +1,70 @@
 {
   "app": "AudioStrike",
   "asset": "assets/branding/AudioStrike.png",
-  "method": "Lossless rectangular extraction of original pixels with ImageMagick. No scaling, recoloring, tracing, generation, transparency fabrication or animal changes. Original cream outside rounded corners retained. Labels excluded.",
-  "coordinate_system": "Origin top-left; crop bounds [left, top, right, bottom), right/bottom exclusive.",
-  "source_sha256": "333494969e42aa593769e0763a6eac98280ade672e395d528640a217d3dbfc13",
-  "crop_bounds": [
-    32,
-    0,
-    688,
-    656
-  ],
+  "method": "Measured rounded alpha mask applied to the original 656x656 logo tile, then translated by whole pixels to center its visible bounds. Original visible RGB and masked visible RGBA were verified unchanged.",
+  "source_tile": {
+    "repository": "Gerbzz/AudioStrike",
+    "commit": "2b996e954f75843a2cf375903b204d6df22ad378",
+    "path": "assets/branding/AudioStrike.png",
+    "sha256": "bb22594fc25ba161fc3b3ea132aa5b796de85dfb78756317af2d1bff9b3af15e",
+    "git_blob_sha": "ecf663739291468f77bd86188b926f9dafeab204"
+  },
+  "mask_and_centering": {
+    "inset_pixels": 1.5,
+    "masked_alpha_bbox": [
+      10,
+      23,
+      625,
+      631
+    ],
+    "centered_alpha_bbox": [
+      20,
+      24,
+      635,
+      632
+    ],
+    "integer_translation": [
+      10,
+      1
+    ],
+    "padding_ltrb": [
+      20,
+      24,
+      21,
+      24
+    ],
+    "original_visible_rgb_exact": true,
+    "masked_visible_rgba_exact": true,
+    "transparent_corners": true
+  },
   "dimensions": [
     656,
     656
   ],
-  "sha256": "bb22594fc25ba161fc3b3ea132aa5b796de85dfb78756317af2d1bff9b3af15e",
-  "decoded_rgb_sha256": "0f0c6e793e582adf84ddebe7b1b21d3311e46c103dabd9ac48d60bf1cf6b90e5",
-  "pixel_equality_verified": true,
-  "git_blob_sha": "ecf663739291468f77bd86188b926f9dafeab204"
+  "mode": "RGBA",
+  "sha256": "3b7d10fc7f243e9fdc5b9c5425dd65eb88dd84e6822fb9886296983dda2122ca",
+  "decoded_rgba_sha256": "73698d634631dc8ef8aed13f1917e1ceb005e91662ea62be6d01192fee5b130f",
+  "git_blob_sha": "14611a213d32849b436f799037338e0c40d410d7",
+  "tool": "ImageMagick 7.1.2-34 Q16 x64",
+  "original_tile_provenance": {
+    "app": "AudioStrike",
+    "asset": "assets/branding/AudioStrike.png",
+    "method": "Lossless rectangular extraction of original pixels with ImageMagick. No scaling, recoloring, tracing, generation, transparency fabrication or animal changes. Original cream outside rounded corners retained. Labels excluded.",
+    "coordinate_system": "Origin top-left; crop bounds [left, top, right, bottom), right/bottom exclusive.",
+    "source_sha256": "333494969e42aa593769e0763a6eac98280ade672e395d528640a217d3dbfc13",
+    "crop_bounds": [
+      32,
+      0,
+      688,
+      656
+    ],
+    "dimensions": [
+      656,
+      656
+    ],
+    "sha256": "bb22594fc25ba161fc3b3ea132aa5b796de85dfb78756317af2d1bff9b3af15e",
+    "decoded_rgb_sha256": "0f0c6e793e582adf84ddebe7b1b21d3311e46c103dabd9ac48d60bf1cf6b90e5",
+    "pixel_equality_verified": true,
+    "git_blob_sha": "ecf663739291468f77bd86188b926f9dafeab204"
+  }
 }
