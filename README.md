@@ -8,19 +8,31 @@
 
 AudioStrike brings track editing, a mix workspace, editable `.scraft` sessions, and WAV export into a Rust desktop source project.
 
-<p align="center"><a href="#build-from-source">Build from source</a> · <a href="#bring-an-earlier-project-forward">Legacy conversion</a> · <a href="UPSTREAM.md">Source provenance</a> · <a href="assets/branding">Original artwork</a></p>
+<p align="center"><a href="#inside-the-workspace">Workspace</a> · <a href="#build-from-source">Build from source</a> · <a href="#bring-an-earlier-project-forward">Legacy conversion</a> · <a href="#current-status">Current status</a> · <a href="UPSTREAM.md">Source provenance</a></p>
 
-## Build a mix without losing the project
+![AudioStrike Edit workspace with the synthesized Midnight Groove session and colored waveform tracks](assets/screenshots/audiostrike-edit.png)
+
+*The retained Windows app running its built-in synthesized “Midnight Groove” demo at 1600 × 1000. Tracks, clips, waveform previews, markers, timeline, and transport are rendered by AudioStrike. Playback hardware was disabled for this capture.*
+
+## Inside the workspace
 
 ### Arrange and revise tracks
 
-The retained editor source shows clips, waveforms, track controls, the timeline, and a mix workspace. Work stays in an editable `.scraft` session; a rendered WAV is a separate review file. The source includes a synthesized demo session rather than captured microphone or bundled commercial media.
+Select and edit tracks beside their clips and waveform previews. The screenshot below shows a real in-app rename from “Kick” to “Pulse Kick”; the changed name appears in the track list and lane. The demo was not saved for the README.
 
-### Export for review
+![AudioStrike Edit workspace after renaming the Kick track to Pulse Kick](assets/screenshots/audiostrike-track-edit.png)
 
-The tested command-line path converted a supported older project, edited and reopened the new session, and exported a **non-silent WAV**. That bounded result is evidence for the CLI workflow, not for speaker audibility or broad interchange fidelity.
+### Shape a mix
 
-### Bring an earlier project forward
+The Mix view exposes inserts, sends, routing, pan controls, meters, and channel faders. After the rename, the selected Pulse Kick track was set to −8 dB with AudioStrike’s `mix.volume` command. The Mix capture shows its changed fader value. This was a UI and document-state check with the audio engine disabled, not an audibility test.
+
+![AudioStrike Mix workspace with Pulse Kick set to minus 8 dB](assets/screenshots/audiostrike-mix.png)
+
+### Keep an editable session and export for review
+
+The foundation uses an editable `.scraft` session and can render a separate WAV. A prior bounded command-line workflow converted a supported older project, edited and reopened the new session, then exported a **non-silent WAV**. That result supports the CLI path; the screenshots above show a different, unsaved demo session.
+
+## Bring an earlier project forward
 
 The earlier AudioStrike preview used a `.audiostrike` directory, which is a different format. Use an explicit copy-based conversion:
 
@@ -44,8 +56,8 @@ The Windows binaries are `audiostrike` and `audiostrike-cli`; retained `soundcra
 
 ## Current status
 
-This is a **pre-alpha source checkpoint**. The workspace passed 612 tests with one ignored, and the synthetic CLI conversion/edit/reopen/export path produced non-silent WAV. The desktop executable compiled but has **not** been opened or visually accepted. Device playback, recording, third-party plugins, accessibility, general format fidelity, and release packaging remain unverified. No release binary is provided.
+This is a **pre-alpha source checkpoint**. An earlier Windows workspace run passed 612 tests with one ignored, and a synthetic CLI conversion/edit/reopen/export path produced a non-silent WAV. For this README, a retained Windows executable was launched and exercised with the built-in synthesized demo: a track rename, volume change, Edit view, and Mix view were visually checked. This was not a new clean-checkout build or workspace test. Device playback, recording, third-party plugins, accessibility, general format fidelity, and release packaging remain unverified. No release binary is provided. [Screenshot provenance](docs/SCREENSHOT_PROVENANCE.md) records the executable hash, source match, capture steps, and image hashes.
 
-AudioStrike adapts the complete [SoundCraft](https://github.com/storytold/soundcraft) Rust source at `480b0b2dd75df388d79746a035652069a9bdcbc6`. The donor MIT/Apache licenses and `NOTICE` remain. [UPSTREAM.md](UPSTREAM.md) records provenance, [ATTRIBUTION.md](ATTRIBUTION.md) distinguishes included donor work from AudioStrike changes, and [DEPENDENCY_RESOLUTION.md](DEPENDENCY_RESOLUTION.md) records the pinned UI dependency. Upstream brand assets and app icon are excluded; a transitive binary notice audit remains before distribution.
+AudioStrike adapts the complete [SoundCraft](https://github.com/storytold/soundcraft) Rust source at `480b0b2dd75df388d79746a035652069a9bdcbc6`. The donor MIT/Apache licenses and `NOTICE` remain. [UPSTREAM.md](UPSTREAM.md) records provenance, [ATTRIBUTION.md](ATTRIBUTION.md) distinguishes included donor work and new documentation captures, and [DEPENDENCY_RESOLUTION.md](DEPENDENCY_RESOLUTION.md) records the pinned UI dependency. The original AudioStrike repository logo is included at [`assets/branding/AudioStrike.png`](assets/branding/AudioStrike.png); upstream brand assets and app icon are excluded. Integration of that logo as an executable icon has not been verified. A transitive binary notice audit remains before distribution.
 
 Explore the other [PWDS Strike repositories](https://github.com/Gerbzz?tab=repositories&q=Strike).
