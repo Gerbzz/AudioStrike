@@ -4,7 +4,14 @@
 
 <h1 align="center">AudioStrike</h1>
 
-<p align="center"><strong>by PWDS</strong><br><strong>Shape a session, then render the mix.</strong></p>
+<p align="center">
+  <a href="https://prowebdevsolutions.com"><picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/branding/PWDS-logo-orange.svg">
+    <img src="assets/branding/PWDS-logo.png" alt="PWDS company logo" width="120">
+  </picture></a>
+</p>
+
+<p align="center"><strong>Shape a session, then render the mix.</strong></p>
 
 AudioStrike brings track editing, a mix workspace, editable `.scraft` sessions, and WAV export into a Rust desktop source project.
 
@@ -61,3 +68,7 @@ This is a **pre-alpha source checkpoint**. An earlier Windows workspace run pass
 AudioStrike adapts the complete [SoundCraft](https://github.com/storytold/soundcraft) Rust source at `480b0b2dd75df388d79746a035652069a9bdcbc6`. The donor MIT/Apache licenses and `NOTICE` remain. [UPSTREAM.md](UPSTREAM.md) records provenance, [ATTRIBUTION.md](ATTRIBUTION.md) distinguishes included donor work and new documentation captures, and [DEPENDENCY_RESOLUTION.md](DEPENDENCY_RESOLUTION.md) records the pinned UI dependency. The original AudioStrike repository logo is included at [`assets/branding/AudioStrike.png`](assets/branding/AudioStrike.png); upstream brand assets and app icon are excluded. Integration of that logo as an executable icon has not been verified. A transitive binary notice audit remains before distribution.
 
 Explore the other [PWDS Strike repositories](https://github.com/Gerbzz?tab=repositories&q=Strike).
+
+## PWDS brand artwork
+
+The company mark in this masthead is the existing [official PWDS logo](https://github.com/Gerbzz/PWDS-Website/blob/main/public/prowebdevsolutions-logo.png), with the [official orange display asset](https://prowebdevsolutions.com/images/prowebdevsolutions-logo-orange.svg) for dark backgrounds. The app logo above it remains the original Strike suite artwork.
