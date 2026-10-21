@@ -1,0 +1,48 @@
+name: AudioStrike mono output
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  windows-source:
+    name: Windows source and preservation tests
+    runs-on: windows-latest
+    timeout-minutes: 40
+    env:
+      EXPECTED_HEAD: ${{ github.event.pull_request.head.sha || github.sha }}
+      CARGO_BUILD_JOBS: 2
+      CARGO_PROFILE_TEST_DEBUG: 0
+      CARGO_PROFILE_TEST_OPT_LEVEL: 0
+      CARGO_INCREMENTAL: 0
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ env.EXPECTED_HEAD }}
+          persist-credentials: false
+      - name: Verify exact source commit
+        shell: pwsh
+        run: |
+          $actual = git rev-parse HEAD
+          if ($actual -ne $env:EXPECTED_HEAD) { throw "Expected $env:EXPECTED_HEAD, got $actual" }
+          Write-Output "Testing source commit $actual"
+      - name: Install Rust 1.96.1
+        run: rustup toolchain install 1.96.1 --profile minimal --component rustfmt
+      - name: Check playback formatting
+        run: cargo +1.96.1 fmt -p soundcraft-playback -- --check
+      - name: Fetch locked Windows dependencies
+        run: cargo +1.96.1 fetch --locked --target x86_64-pc-windows-msvc
+      - name: Mono callback regressions
+        run: cargo +1.96.1 test --locked --offline -p soundcraft-playback --lib mono_device_ --config "profile.dev.package.'*'.opt-level=0"
+      - name: Entire playback library
+        run: cargo +1.96.1 test --locked --offline -p soundcraft-playback --lib --config "profile.dev.package.'*'.opt-level=0"
+      - name: Save and export refusals
+        run: cargo +1.96.1 test --locked --offline -p soundcraft-engine --lib io::export_safety_tests --config "profile.dev.package.'*'.opt-level=0"
+      - name: Legacy conversion preservation
+        run: cargo +1.96.1 test --locked --offline -p soundcraft-engine --lib legacy::tests --config "profile.dev.package.'*'.opt-level=0"
+      - name: Full workspace tests
+        run: cargo +1.96.1 test --locked --offline --workspace --config "profile.dev.package.'*'.opt-level=0"
