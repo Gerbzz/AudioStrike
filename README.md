@@ -17,6 +17,12 @@ AudioStrike brings track editing, a mix workspace, editable `.scraft` sessions, 
 
 <p align="center"><a href="#inside-the-workspace">Workspace</a> · <a href="#build-from-source">Build from source</a> · <a href="#bring-an-earlier-project-forward">Legacy conversion</a> · <a href="#current-status">Current status</a> · <a href="UPSTREAM.md">Source provenance</a></p>
 
+## Rust direction and migration status
+
+- **Target:** A Rust-native audio editing and mixing application, extending the selected SoundCraft foundation rather than restarting its Rust implementation.
+- **Current implementation:** The [Cargo workspace](Cargo.toml) and [desktop entry point](apps/soundcraft/src/main.rs) are already Rust. The current `.scraft` foundation is separate from the earlier `.audiostrike` project format.
+- **Remaining migration:** Continue Rust integration and validate device playback, recording, plugins, format fidelity and packaging. Legacy project conversion remains explicit and bounded as described below; the pre-alpha checkpoint does not establish a complete migration or release.
+
 ![AudioStrike Edit workspace with the synthesized Midnight Groove session and colored waveform tracks](assets/screenshots/audiostrike-edit.png)
 
 *The retained Windows app running its built-in synthesized “Midnight Groove” demo at 1600 × 1000. Tracks, clips, waveform previews, markers, timeline, and transport are rendered by AudioStrike. Playback hardware was disabled for this capture.*
