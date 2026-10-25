@@ -7,12 +7,14 @@
 
 fn main() {
     println!("cargo:rerun-if-changed=build.rs");
+    println!("cargo:rerun-if-changed=../../assets/branding/AudioStrike.ico");
     println!("cargo:rerun-if-env-changed=AUDIOSTRIKE_REQUIRE_WINRES");
     if std::env::var("CARGO_CFG_TARGET_OS").as_deref() != Ok("windows") {
         return;
     }
     let mut res = winresource::WindowsResource::new();
-    res.set("ProductName", "AudioStrike")
+    res.set_icon("../../assets/branding/AudioStrike.ico")
+        .set("ProductName", "AudioStrike")
         .set("FileDescription", "AudioStrike digital audio workstation")
         .set("LegalCopyright", "SoundCraft contributors and AudioStrike contributors. MIT OR Apache-2.0.")
         .set("OriginalFilename", "audiostrike.exe")
