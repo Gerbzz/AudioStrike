@@ -11,6 +11,11 @@
 #![cfg_attr(all(target_os = "windows", not(debug_assertions)), windows_subsystem = "windows")]
 #![deny(clippy::unwrap_used, clippy::expect_used, clippy::panic, clippy::unimplemented, clippy::todo, clippy::unreachable)]
 
+/// Approved artwork resized from its full canvas, preserving centering and padding.
+fn app_icon() -> egui::IconData {
+    egui::IconData { rgba: include_bytes!("../../../assets/branding/AudioStrike-128.rgba").to_vec(), width: 128, height: 128 }
+}
+
 mod config;
 mod control_server;
 #[cfg(any(target_os = "windows", test))]
@@ -216,6 +221,7 @@ fn main() -> eframe::Result {
     let prefs = load_prefs().unwrap_or_default();
     let mut options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()
+            .with_icon(app_icon())
             .with_title("AudioStrike")
             .with_inner_size(sane_window_size(prefs.window_size))
             .with_maximized(prefs.window_maximized)
