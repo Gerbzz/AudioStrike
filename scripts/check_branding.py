@@ -15,22 +15,22 @@ class BrandingContract(unittest.TestCase):
         path = ROOT / f"assets/branding/{APP}.png"
         self.assertEqual(sha256(path.read_bytes()).hexdigest(), APPROVED)
         self.assertEqual(Image.open(BytesIO(path.read_bytes())).size, (512, 512))
-        metadata = json.loads((path.parent / "provenance.json").read_text())
+        metadata = json.loads((path.parent / "provenance.json").read_text(encoding="utf-8"))
         self.assertEqual(metadata["sha256"], APPROVED)
     def test_runtime_derivative_and_binding(self):
         source = Image.open(ROOT / f"assets/branding/{APP}.png").convert("RGBA")
         self.assertTrue((ROOT / f"assets/branding/{APP}-128.rgba").exists(), "runtime derivative missing")
         self.assertEqual((ROOT / f"assets/branding/{APP}-128.rgba").read_bytes(), source.resize((128, 128), Image.Resampling.LANCZOS).tobytes())
-        code = (ROOT / f"apps/{PACKAGE}/src/main.rs").read_text()
+        code = (ROOT / f"apps/{PACKAGE}/src/main.rs").read_text(encoding="utf-8")
         self.assertIn(".with_icon(app_icon())", code)
         self.assertIn(f'include_bytes!("../../../assets/branding/{APP}-128.rgba")', code)
         self.assertIn("width: 128, height: 128", code)
     def test_readme_uses_canonical_source(self):
-        self.assertIn(f'assets/branding/{APP}.png', (ROOT / "README.md").read_text())
+        self.assertIn(f'assets/branding/{APP}.png', (ROOT / "README.md").read_text(encoding="utf-8"))
     def test_windows_resource(self):
         if APP == "AnimateStrike":
             self.skipTest("No Windows resource/package build in this repository; native window binding is tested")
-        code = (ROOT / f"apps/{PACKAGE}/build.rs").read_text()
+        code = (ROOT / f"apps/{PACKAGE}/build.rs").read_text(encoding="utf-8")
         self.assertIn(f'set_icon("../../assets/branding/{APP}.ico")', code)
         self.assertIn(f'cargo:rerun-if-changed=../../assets/branding/{APP}.ico', code)
         source = Image.open(ROOT / f"assets/branding/{APP}.png").convert("RGBA")
